@@ -1,11 +1,14 @@
 package com.library.service;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 import com.library.bean.User;
 import com.library.util.ReadData;
@@ -13,6 +16,21 @@ import com.library.util.ReadData;
 public class LibraryService {
 
 	public static List<String> bookNames = new ArrayList<String>();
+	
+	static {
+		try {
+		      File myObj = new File("D:\\Library\\books\\books.txt");
+		      Scanner myReader = new Scanner(myObj);
+		      while (myReader.hasNextLine()) {
+		        String data = myReader.nextLine();
+		        System.out.println(data);
+		      }
+		      myReader.close();
+		    } catch (FileNotFoundException e) {
+		      System.out.println("An error occurred.");
+		      e.printStackTrace();
+		    }
+	}
 	
 
 	public void registerCustomer() {
