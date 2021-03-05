@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import com.library.bean.User;
 import com.library.exception.BookNotIssuedException;
+import com.library.exception.InvalidBookException;
 import com.library.exception.InvalidUserException;
 import com.library.util.FileUtil;
 import com.library.util.ReadData;
@@ -23,7 +24,7 @@ public class LibraryService {
 
 	static void populateBooks(){
 		try {
-			File myObj = new File("I:\\Library\\LibraryManagement\\Library\\resources\\books.txt");
+			File myObj = new File("resources\\books.txt");
 			Scanner myReader = new Scanner(myObj);
 			while (myReader.hasNextLine()) {
 				String data = myReader.nextLine();
@@ -61,7 +62,7 @@ public class LibraryService {
 	}
 
 
-	public void issueBook() throws InvalidUserException {
+	public void issueBook() throws InvalidUserException, InvalidBookException {
 
 		System.out.println();
 		System.out.println("=====================================");
@@ -74,13 +75,17 @@ public class LibraryService {
 
 		System.out.print("Book Name \t\t\t\t:");
 		String bookName=ReadData.acceptString();
+		if(!bookNames.contains(bookName)) {
+			throw new InvalidBookException("Invalid Book Name");
+		}
+		
 		user.setBookName(bookName);
 
 		FileUtil.writeUserFile(user.getUserId(), user);
 		System.out.println("Book Issued successfully !!");
 	}
 
-	public void returnBook() throws InvalidUserException, BookNotIssuedException {
+	public void returnBook() throws InvalidUserException, BookNotIssuedException, InvalidBookException {
 
 		System.out.println();
 		System.out.println("=====================================");
@@ -94,7 +99,10 @@ public class LibraryService {
 
 		System.out.print("Book Name \t\t\t\t:");
 		String bookName=ReadData.acceptString();
-
+		if(!bookNames.contains(bookName)) {
+			throw new InvalidBookException("Invalid Book Name");
+		}
+		
 		if(!bookName.equalsIgnoreCase(user.getBookName())){
 			throw new BookNotIssuedException("Book not issued to user.");
 		}

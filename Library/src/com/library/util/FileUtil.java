@@ -15,7 +15,7 @@ public class FileUtil {
 
 		try {
 			FileOutputStream fileOut =
-					new FileOutputStream("I:\\Library\\LibraryManagement\\Library\\resources\\user\\"+fileName+".ser");
+					new FileOutputStream("resources\\user\\"+fileName+".ser");
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
 			out.writeObject(user);
 			out.close();
@@ -30,7 +30,7 @@ public class FileUtil {
 		User user = null;
 		try {
 			FileInputStream fileIn =
-					new FileInputStream("I:\\Library\\LibraryManagement\\Library\\resources\\user\\"+fileName+".ser");
+					new FileInputStream("resources\\user\\"+fileName+".ser");
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			user = (User)in.readObject();
 			in.close();
