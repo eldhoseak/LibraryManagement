@@ -11,11 +11,12 @@ import com.library.exception.InvalidUserException;
 
 public class FileUtil {
 
+	private final static String USER_FILE_LOCATION="resources\\user\\%s.ser";
 	public static void writeUserFile(String fileName, User user){
 
 		try {
 			FileOutputStream fileOut =
-					new FileOutputStream("resources\\user\\"+fileName+".ser");
+					new FileOutputStream(String.format(USER_FILE_LOCATION, fileName));
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
 			out.writeObject(user);
 			out.close();
@@ -30,13 +31,13 @@ public class FileUtil {
 		User user = null;
 		try {
 			FileInputStream fileIn =
-					new FileInputStream("resources\\user\\"+fileName+".ser");
+					new FileInputStream(String.format(USER_FILE_LOCATION, fileName));
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			user = (User)in.readObject();
 			in.close();
 			fileIn.close();
 		} catch (Exception i) {
-			throw new InvalidUserException("Invalid UserId");
+			throw new InvalidUserException("ERROR -- Invalid UserId!!");
 		}
 		return user;
 	}

@@ -1,10 +1,12 @@
-package com.library.test;
-import com.library.service.LibraryService;
+package com.library.starter;
+import com.library.service.BookService;
+import com.library.service.UserService;
 import com.library.util.ReadData;
 
-public class MainMenu {
+public class StarterClass {
 
-	private LibraryService service=new LibraryService();
+	private UserService userService=new UserService();
+	private BookService bookService=new BookService();
 
 	public void display(){
 
@@ -50,20 +52,21 @@ public class MainMenu {
 				switch(choice){
 				// Call method to register user
 				case 1: System.out.println();
-				service.registerUser();
+				userService.registerUser();
 				break;
 				
 				// Call method to issue book
 				case 2: System.out.println();
-				service.issueBook();
+				bookService.issueBook();
 				break;
 
 				// Call method to return book
 				case 3: System.out.println();
-				service.returnBook();
+				bookService.returnBook();
 				break;
 
-				case 4: System.exit(0);
+				case 4: System.out.println("Thanks. Good Day !!");
+				System.exit(0);
 				default: System.out.print("Invalid Choice!");
 				System.out.println("Enter the choice between <1-4>");
 				System.out.println();
@@ -79,7 +82,7 @@ public class MainMenu {
 
 	
 	public static void main(String[] args) {
-		MainMenu menu = new MainMenu();
+		StarterClass menu = new StarterClass();
 		menu.display();
 	}
 }
